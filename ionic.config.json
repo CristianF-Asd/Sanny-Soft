@@ -1,0 +1,7 @@
+{
+  "name": "SannySoft",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
