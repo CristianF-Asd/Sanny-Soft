@@ -23,7 +23,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Productolist from './pages/Productos/productolist';
+import Productolist from './pages/Productos/Productolist';
+import ProductEdit from './pages/Productos/ProductEdit';
 
 setupIonicReact();
 
@@ -46,6 +47,10 @@ const App: React.FC = () => {
             
             <Route path="/page/productos" exact={true}>  
               <Productolist />
+            </Route>
+
+            <Route path="/page/productos/:id" exact={true}>  
+              <ProductEdit />
             </Route>
             
           </IonRouterOutlet>

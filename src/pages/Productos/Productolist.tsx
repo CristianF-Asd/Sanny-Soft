@@ -1,11 +1,59 @@
-import { IonButtons, IonCol, IonContent, IonGrid, IonHeader, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { useParams } from 'react-router';
+import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import './Productolist.css';
+import { add, pencil, close } from 'ionicons/icons';
+import { useEffect, useState } from 'react';
+import { removeProduct, saveProduct, searchProduct } from './ProductoApi';
 
 const Productolist: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
+  const [productos, setProductos] = useState<any>([]);
+  const history = useHistory();
+
+  useEffect(() => {
+      search();
+  }
+  , [history.location.pathname]);
+
+  
+
+  const search = () =>{
+    let result = searchProduct();
+    setProductos(result);
+
+  }
+  const remove = (id: string) =>{
+
+    removeProduct(id);
+    search();
+
+
+  }
+
+  const pruebaLocalStorage = () =>{
+    const ejemplo = {
+      id: '1',
+      name: 'Aceite',
+      price: '2.50',
+      category: 'Viveres',
+      stock: '10'
+                 
+    }
+    saveProduct(ejemplo)
+
+  }
+const addProduct = () =>{
+  history.push('/page/productos/new');
+}
+
+const editProduct = (id:string) =>{
+  history.push('/page/productos/'+id);
+}
+  
+
+
 
   return (
     <IonPage>
@@ -23,42 +71,63 @@ const Productolist: React.FC = () => {
             <IonTitle size="large">{name}</IonTitle>
           </IonToolbar>
         </IonHeader>
+        <IonCard>
+          <IonTitle>Gestion de Productos</IonTitle>
+
+          <IonItem>
+            <IonButton onClick={addProduct} color="primary" fill="solid" slot="end" size="default">
+              <IonIcon icon={add} />
+              Agregar Producto
+            </IonButton>
+          </IonItem>
+          <IonGrid className="table">
+              <IonRow>
+                <IonCol>Id</IonCol>
+                <IonCol>Nombre</IonCol>
+                <IonCol>Precio</IonCol>
+                <IonCol>Categoria</IonCol>
+                <IonCol>Stock</IonCol>
+                <IonCol>Acciones</IonCol>
+              </IonRow>
+
+
+              {productos.map((producto:any) =>
+
+                <IonRow>
+                  <IonCol>{producto.id}</IonCol>
+                  <IonCol>{producto.name}</IonCol>
+                  <IonCol>{producto.price}</IonCol>
+                  <IonCol>{producto.category}</IonCol>
+                  <IonCol>{producto.stock}</IonCol>
+                  <IonCol>
+                    <IonButton onClick={() => editProduct(producto.id)} color="primary" fill='clear'>
+                      <IonIcon icon={pencil} slot="icon-only"/>
+
+                    </IonButton>
+                    <IonButton color="danger" fill='clear' onClick={() => remove(producto.id)}>
+                      <IonIcon icon={close} slot="icon-only"/>
+
+                    </IonButton>
+
+                  </IonCol>
+                </IonRow>
+                      
+                )}
+          
+              
+          </IonGrid>
+
+         
+          
+
+        </IonCard>
+
+        <IonButton color="danger" fill='clear' onClick={pruebaLocalStorage}>
+          Prueba 
+                     
+
+          </IonButton>
         
-        <IonGrid>
-            <IonRow>
-            <IonCol>1</IonCol>
-            <IonCol>2</IonCol>
-            <IonCol>3</IonCol>
-            </IonRow>
-        </IonGrid>
-
-        <IonGrid>
-            <IonRow>
-            <IonCol>1</IonCol>
-            <IonCol>2</IonCol>
-            <IonCol>3</IonCol>
-            <IonCol>4</IonCol>
-            <IonCol>5</IonCol>
-            <IonCol>6</IonCol>
-            </IonRow>
-        </IonGrid>
-
-        <IonGrid>
-            <IonRow>
-            <IonCol>1</IonCol>
-            <IonCol>2</IonCol>
-            <IonCol>3</IonCol>
-            <IonCol>4</IonCol>
-            <IonCol>5</IonCol>
-            <IonCol>6</IonCol>
-            <IonCol>7</IonCol>
-            <IonCol>8</IonCol>
-            <IonCol>9</IonCol>
-            <IonCol>10</IonCol>
-            <IonCol>11</IonCol>
-            <IonCol>12</IonCol>
-            </IonRow>
-        </IonGrid>
         
       </IonContent>
     </IonPage>
