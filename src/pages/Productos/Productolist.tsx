@@ -5,11 +5,12 @@ import './Productolist.css';
 import { add, pencil, close } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { removeProduct, saveProduct, searchProduct } from './ProductoApi';
+import Product from './Products';
 
 const Productolist: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [productos, setProductos] = useState<any>([]);
+  const [productos, setProductos] = useState<Product[]>([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -91,7 +92,7 @@ const editProduct = (id:string) =>{
               </IonRow>
 
 
-              {productos.map((producto:any) =>
+              {productos.map((producto:Product) =>
 
                 <IonRow>
                   <IonCol>{producto.id}</IonCol>
@@ -100,11 +101,11 @@ const editProduct = (id:string) =>{
                   <IonCol>{producto.category}</IonCol>
                   <IonCol>{producto.stock}</IonCol>
                   <IonCol>
-                    <IonButton onClick={() => editProduct(producto.id)} color="primary" fill='clear'>
+                    <IonButton onClick={() => editProduct(String(producto.id))} color="primary" fill='clear'>
                       <IonIcon icon={pencil} slot="icon-only"/>
 
                     </IonButton>
-                    <IonButton color="danger" fill='clear' onClick={() => remove(producto.id)}>
+                    <IonButton color="danger" fill='clear' onClick={() => remove(String(producto.id))}>
                       <IonIcon icon={close} slot="icon-only"/>
 
                     </IonButton>
@@ -112,23 +113,11 @@ const editProduct = (id:string) =>{
                   </IonCol>
                 </IonRow>
                       
-                )}
-          
-              
+                )}      
           </IonGrid>
-
-         
-          
-
         </IonCard>
 
-        <IonButton color="danger" fill='clear' onClick={pruebaLocalStorage}>
-          Prueba 
-                     
 
-          </IonButton>
-        
-        
       </IonContent>
     </IonPage>
   );

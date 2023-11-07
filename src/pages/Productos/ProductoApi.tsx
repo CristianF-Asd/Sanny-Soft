@@ -1,3 +1,5 @@
+import Product from "./Products";
+
 export function searchProduct(){
     if (!localStorage['products']){
         localStorage['products'] = '[]';
@@ -19,18 +21,18 @@ export function removeProduct(id: string){
 
 export function searchProductById(id: string){
     let products = searchProduct();
-    return products.find((product:any) => product.id == id);
+    return products.find((product:Product) => product.id == id);
 }
 
-export function saveProduct(product:any){
+export function saveProduct(product:Product){
     let products = searchProduct();
     if(product.id){
        //Editar
-       let indice = products.findIndex((c: any) => c.id == product.id );
+       let indice = products.findIndex((c: Product) => c.id == product.id );
        products[indice] = product;
     }else{
         //Nuevo
-        product.id = Math.round(Math.random()*100000);
+        product.id = String(Math.round(Math.random()*100000));
         products.push(product);
     }
     

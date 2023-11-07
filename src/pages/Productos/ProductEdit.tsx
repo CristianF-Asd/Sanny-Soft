@@ -5,11 +5,12 @@ import './Productolist.css';
 import { add, pencil, close, checkmark } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { removeProduct, saveProduct, searchProduct, searchProductById } from './ProductoApi';
+import Product from './Products';
 
 const ProductEdit: React.FC = () => {
 
   const { name, id } = useParams<{ name: string; id: string; }>();
-  const [producto, setProducto] = useState<any>({});
+  const [producto, setProducto] = useState<Product>({});
   const history = useHistory();
 
   useEffect(() => {
@@ -65,31 +66,31 @@ const ProductEdit: React.FC = () => {
 
                 <IonItem>
                     <IonLabel position='stacked'>Nombre</IonLabel>
-                    <IonInput onIonChange={e =>  producto.name = e.detail.value}  
+                    <IonInput onIonChange={e =>  producto.name = String(e.detail.value)}  
                     value={producto.name}></IonInput>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel position='stacked'>Precio</IonLabel>
-                    <IonInput onIonChange={e =>  producto.price = e.detail.value}  
+                    <IonInput onIonChange={e =>  producto.price = String(e.detail.value)}  
                     value={producto.price}></IonInput>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel position='stacked'>Categoria</IonLabel>
-                    <IonInput onIonChange={e =>  producto.category = e.detail.value}  
+                    <IonInput onIonChange={e =>  producto.category = String(e.detail.value)}  
                     value={producto.category}></IonInput>
                 </IonItem>
                 <IonItem>
                     <IonLabel position='stacked'>Stock</IonLabel>
-                    <IonInput onIonChange={e =>  producto.stock = e.detail.value}  
+                    <IonInput onIonChange={e =>  producto.stock = String(e.detail.value)}  
                     value={producto.stock}></IonInput>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel position='stacked'>Codigo de Barras</IonLabel>
-                    <IonInput onIonChange={e =>  producto.barcode = e.detail.value}  
-                    value={producto.barcode}></IonInput>
+                    <IonInput onIonChange={e =>  producto.codbar = String(e.detail.value)}  
+                    value={producto.codbar}></IonInput>
                 </IonItem>
 
                 
