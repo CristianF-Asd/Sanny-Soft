@@ -1,42 +1,56 @@
 import Product from "./Products";
 
-export function searchProduct(){
-    if (!localStorage['products']){
-        localStorage['products'] = '[]';
-    }
+export async function searchProduct(){
 
 
-    let products = localStorage['products']
-    products = JSON.parse(products);
-    return products;
-
-}
-export function removeProduct(id: string){
-    let products = searchProduct();
-    let indice = products.findIndex((product: any) => product.id == id )
-    products.splice(indice,1);
-    localStorage['products'] = JSON.stringify(products)
-
-}
-
-export function searchProductById(id: string){
-    let products = searchProduct();
-    return products.find((product:Product) => product.id == id);
-}
-
-export function saveProduct(product:Product){
-    let products = searchProduct();
-    if(product.id){
-       //Editar
-       let indice = products.findIndex((c: Product) => c.id == product.id );
-       products[indice] = product;
-    }else{
-        //Nuevo
-        product.id = String(Math.round(Math.random()*100000));
-        products.push(product);
-    }
     
-    localStorage['products'] = JSON.stringify(products)
+    let response = await fetch('http://localhost:8080/api/products', {
+        "method":'GET',
+        "headers": {
+            "Content-Type": 'application/json'
+        }
+    })
+
+
+    return await response.json();
+    
+}
+
+export async function removeProduct(id: string){
+    await fetch(`http://localhost:8080/api/products/${id}`, {
+        "method":'DELETE',
+        "headers": {
+            "Content-Type": 'application/json'
+        }
+    })
+
+
+
+}
+
+export async function searchProductById(id: string){
+    let response = await fetch(`http://localhost:8080/api/products/${id}`, {
+        "method":'GET',
+        "headers": {
+            "Content-Type": 'application/json'
+        }
+    })
+
+
+    return await response.json();
+}
+
+export async function saveProduct(product:Product){
+    await fetch('http://localhost:8080/api/products/', {
+        "method":'POST',
+        "body": JSON.stringify(product),
+        "headers": {
+            "Content-Type": 'application/json'
+        }
+    })
+
+
+  
 
 
 

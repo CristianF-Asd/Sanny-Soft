@@ -1,5 +1,5 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams, useRouteMatch } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import './Productolist.css';
 import { add, pencil, close, checkmark } from 'ionicons/icons';
@@ -9,29 +9,38 @@ import Product from './Products';
 
 const ProductEdit: React.FC = () => {
 
-  const { name, id } = useParams<{ name: string; id: string; }>();
+  const { name } = useParams<{ name: string; }>();
   const [producto, setProducto] = useState<Product>({});
   const history = useHistory();
+  
+  const routeMatch: any = useRouteMatch("/page/productos/:id");
+  const id = routeMatch?.params?.id;
+
 
   useEffect(() => {
       search();
   }
-  , []);
+  , [history.location.pathname]);
 
   
 
-  const search = () =>{
-    if (id !== 'new'){
-        let result = searchProductById(id);
-        setProducto(result);
+  const search = async () =>{
+    
+    if (id === 'new'){
+        setProducto({});
 
+    }else{
+      let result =await searchProductById(id);
+      setProducto(result);
     }
 
   }
 
-  const save = () => {
+  const save = async() => {
+
     
-    saveProduct(producto);
+    
+    await saveProduct(producto);
     history.push('/page/productos');
 
   }
@@ -66,31 +75,38 @@ const ProductEdit: React.FC = () => {
 
                 <IonItem>
                     <IonLabel position='stacked'>Nombre</IonLabel>
-                    <IonInput onIonChange={e =>  producto.name = String(e.detail.value)}  
-                    value={producto.name}></IonInput>
+                    <IonInput onIonChange={e =>  producto.nom_pro = String(e.detail.value)}  
+                    value={producto.nom_pro}></IonInput>
+                </IonItem>
+
+                <IonItem>
+                    <IonLabel position='stacked'>Descripcion</IonLabel>
+                    <IonInput onIonChange={e =>  producto.des_pro = String(e.detail.value)}  
+                    value={producto.des_pro}></IonInput>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel position='stacked'>Precio</IonLabel>
-                    <IonInput onIonChange={e =>  producto.price = String(e.detail.value)}  
-                    value={producto.price}></IonInput>
+                    <IonInput onIonChange={e =>  producto.prec_pro = Number(e.detail.value)}  
+                    value={producto.prec_pro}></IonInput>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel position='stacked'>Categoria</IonLabel>
-                    <IonInput onIonChange={e =>  producto.category = String(e.detail.value)}  
-                    value={producto.category}></IonInput>
+                    <IonInput onIonChange={e =>  producto.cat_pro_cod = Number(e.detail.value)}  
+                    value={producto.cat_pro_cod}></IonInput>
                 </IonItem>
                 <IonItem>
                     <IonLabel position='stacked'>Stock</IonLabel>
-                    <IonInput onIonChange={e =>  producto.stock = String(e.detail.value)}  
-                    value={producto.stock}></IonInput>
+                    <IonInput onIonChange={e =>  producto.stock_pro = Number(e.detail.value)}  
+                    value={producto.stock_pro}></IonInput>
                 </IonItem>
+                
 
                 <IonItem>
                     <IonLabel position='stacked'>Codigo de Barras</IonLabel>
-                    <IonInput onIonChange={e =>  producto.codbar = String(e.detail.value)}  
-                    value={producto.codbar}></IonInput>
+                    <IonInput onIonChange={e =>  producto.cod_bar_pro = String(e.detail.value)}  
+                    value={producto.cod_bar_pro}></IonInput>
                 </IonItem>
 
                 

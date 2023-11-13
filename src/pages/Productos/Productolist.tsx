@@ -20,31 +20,20 @@ const Productolist: React.FC = () => {
 
   
 
-  const search = () =>{
-    let result = searchProduct();
+  const search = async () =>{
+    let result =await searchProduct();
     setProductos(result);
 
   }
-  const remove = (id: string) =>{
+  const remove = async (id: string) =>{
 
-    removeProduct(id);
+    await removeProduct(id);
     search();
 
 
   }
 
-  const pruebaLocalStorage = () =>{
-    const ejemplo = {
-      id: '1',
-      name: 'Aceite',
-      price: '2.50',
-      category: 'Viveres',
-      stock: '10'
-                 
-    }
-    saveProduct(ejemplo)
-
-  }
+  
 const addProduct = () =>{
   history.push('/page/productos/new');
 }
@@ -95,17 +84,17 @@ const editProduct = (id:string) =>{
               {productos.map((producto:Product) =>
 
                 <IonRow>
-                  <IonCol>{producto.id}</IonCol>
-                  <IonCol>{producto.name}</IonCol>
-                  <IonCol>{producto.price}</IonCol>
-                  <IonCol>{producto.category}</IonCol>
-                  <IonCol>{producto.stock}</IonCol>
+                  <IonCol >{producto.id_pro}</IonCol>
+                  <IonCol>{producto.nom_pro}</IonCol>
+                  <IonCol>{producto.prec_pro}</IonCol>
+                  <IonCol>{producto.cat_pro_cod}</IonCol>
+                  <IonCol>{producto.stock_pro}</IonCol>
                   <IonCol>
-                    <IonButton onClick={() => editProduct(String(producto.id))} color="primary" fill='clear'>
+                    <IonButton onClick={() => editProduct(String(producto.id_pro))} color="primary" fill='clear'>
                       <IonIcon icon={pencil} slot="icon-only"/>
 
                     </IonButton>
-                    <IonButton color="danger" fill='clear' onClick={() => remove(String(producto.id))}>
+                    <IonButton color="danger" fill='clear' onClick={() => remove(String(producto.id_pro))}>
                       <IonIcon icon={close} slot="icon-only"/>
 
                     </IonButton>
