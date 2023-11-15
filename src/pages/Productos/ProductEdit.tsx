@@ -32,6 +32,7 @@ const ProductEdit: React.FC = () => {
     }else{
       let result =await searchProductById(id);
       setProducto(result);
+      console.log(result)
     }
 
   }
@@ -91,11 +92,7 @@ const ProductEdit: React.FC = () => {
                     value={producto.prec_pro}></IonInput>
                 </IonItem>
 
-                <IonItem>
-                    <IonLabel position='stacked'>Categoria</IonLabel>
-                    <IonInput onIonChange={e =>  producto.cat_pro_cod = Number(e.detail.value)}  
-                    value={producto.cat_pro_cod}></IonInput>
-                </IonItem>
+                
                 <IonItem>
                     <IonLabel position='stacked'>Stock</IonLabel>
                     <IonInput onIonChange={e =>  producto.stock_pro = Number(e.detail.value)}  

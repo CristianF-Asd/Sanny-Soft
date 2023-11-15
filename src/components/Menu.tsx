@@ -29,8 +29,8 @@ const appPages: AppPage[] = [
     mdIcon: albumsOutline
   },
   {
-    title: 'Outbox',
-    url: '/page/Outbox',
+    title: 'Categorias',
+    url: '/page/categorias',
     iosIcon: paperPlaneOutline,
     mdIcon: paperPlaneSharp
   },

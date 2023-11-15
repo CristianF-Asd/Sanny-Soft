@@ -1,16 +1,16 @@
 import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
 import { useHistory, useParams } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
-import './Productolist.css';
+import './Categorialist.css';
 import { add, pencil, close } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
-import { removeProduct, saveProduct, searchProduct } from './ProductoApi';
-import Product from './Products';
+import { removeCategory, saveCategory, searchCategory } from './CategoriaApi';
+import Category from './Category';
 
-const Productolist: React.FC = () => {
+const Categorialist: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [productos, setProductos] = useState<Product[]>([]);
+  const [categorias, setCategorias] = useState<Category[]>([]);
   const history = useHistory();
 
   useEffect(() => {
@@ -21,25 +21,25 @@ const Productolist: React.FC = () => {
   
 
   const search = async () =>{
-    let result =await searchProduct();
-    setProductos(result);
+    let result =await searchCategory();
+    setCategorias(result);
 
   }
   const remove = async (id: string) =>{
 
-    await removeProduct(id);
+    await removeCategory(id);
     search();
 
 
   }
 
   
-const addProduct = () =>{
-  history.push('/page/productos/new');
+const addCategory = () =>{
+  history.push('/page/categorias/new');
 }
 
-const editProduct = (id:string) =>{
-  history.push('/page/productos/'+id);
+const editCategory = (id:string) =>{
+  history.push('/page/categorias/'+id);
 }
   
 
@@ -65,7 +65,7 @@ const editProduct = (id:string) =>{
           <IonTitle>Gestion de Productos</IonTitle>
 
           <IonItem>
-            <IonButton onClick={addProduct} color="primary" fill="solid" slot="end" size="default">
+            <IonButton onClick={addCategory} color="primary" fill="solid" slot="end" size="default">
               <IonIcon icon={add} />
               Agregar Producto
             </IonButton>
@@ -74,27 +74,22 @@ const editProduct = (id:string) =>{
               <IonRow>
                 <IonCol>Id</IonCol>
                 <IonCol>Nombre</IonCol>
-                <IonCol>Precio</IonCol>
-                <IonCol>Categoria</IonCol>
-                <IonCol>Stock</IonCol>
-                <IonCol>Acciones</IonCol>
+                
               </IonRow>
 
 
-              {productos.map((producto:Product) =>
+              {categorias.map((categoria:Category) =>
 
                 <IonRow>
-                  <IonCol >{producto.id_pro}</IonCol>
-                  <IonCol>{producto.nom_pro}</IonCol>
-                  <IonCol>{producto.prec_pro}</IonCol>
-                  <IonCol>{producto.category?.nom_cat}</IonCol>
-                  <IonCol>{producto.stock_pro}</IonCol>
+                  <IonCol >{categoria.id_cat}</IonCol>
+                  <IonCol>{categoria.nom_cat}</IonCol>
+                  
                   <IonCol>
-                    <IonButton onClick={() => editProduct(String(producto.id_pro))} color="primary" fill='clear'>
+                    <IonButton onClick={() => editCategory(String(categoria.id_cat))} color="primary" fill='clear'>
                       <IonIcon icon={pencil} slot="icon-only"/>
 
                     </IonButton>
-                    <IonButton color="danger" fill='clear' onClick={() => remove(String(producto.id_pro))}>
+                    <IonButton color="danger" fill='clear' onClick={() => remove(String(categoria.id_cat))}>
                       <IonIcon icon={close} slot="icon-only"/>
 
                     </IonButton>
@@ -112,4 +107,4 @@ const editProduct = (id:string) =>{
   );
 };
 
-export default Productolist;
+export default Categorialist;
