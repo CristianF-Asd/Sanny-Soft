@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import { useHistory, useParams, useRouteMatch } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import './Categorialist.css';
@@ -11,9 +11,11 @@ const CategoriaEdit: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
   const [categoria, setCategoria] = useState<Category>({});
+  const [estadoOptions, setEstadoOptions] = useState<string[]>(['A', 'I']);
   const history = useHistory();
   
   const routeMatch: any = useRouteMatch("/page/categorias/:id");
+  
   const id = routeMatch?.params?.id;
 
 
@@ -74,16 +76,25 @@ const CategoriaEdit: React.FC = () => {
 
           <IonList>
 
-                <IonItem>
-                    <IonLabel position='stacked'>Id</IonLabel>
-                    <IonInput onIonChange={e =>  categoria.id_cat = Number(e.detail.value)}  
-                    value={categoria.id_cat}></IonInput>
-                </IonItem>
+                
 
                 <IonItem>
                     <IonLabel position='stacked'>Nombre</IonLabel>
                     <IonInput onIonChange={e =>  categoria.nom_cat = String(e.detail.value)}  
                     value={categoria.nom_cat}></IonInput>
+                </IonItem>
+
+                <IonItem>
+                    <IonLabel position='stacked'>Estado</IonLabel>
+                    <IonSelect
+                      value={categoria.est_reg_cat} onIonChange={(e) => (categoria.est_reg_cat = e.detail.value!)}>
+                        
+                      {estadoOptions.map((option, index) => (
+                        <IonSelectOption key={index} value={option}>
+                          {option}
+                        </IonSelectOption>
+                      ))}
+                    </IonSelect>
                 </IonItem>
                
             </IonList> 

@@ -1,17 +1,22 @@
-import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonCard, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonMenuButton, IonPage, IonRow, IonSelect, IonSelectOption, IonTitle, IonToolbar } from '@ionic/react';
 import { useHistory, useParams, useRouteMatch } from 'react-router';
 import ExploreContainer from '../../components/ExploreContainer';
 import './Productolist.css';
 import { add, pencil, close, checkmark } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { removeProduct, saveProduct, searchProduct, searchProductById } from './ProductoApi';
+import { searchCategory } from '../Categorias/CategoriaApi';
 import Product from './Products';
+import Category from '../Categorias/Category';
 
 const ProductEdit: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [producto, setProducto] = useState<Product>({});
+  const [producto, setProducto] = useState<Product>({}); 
+  const [categorias, setCategorias] = useState<Category[]>([]);
   const history = useHistory();
+  const [estadoOptions, setEstadoOptions] = useState<string[]>(['A', 'I']);
+
   
   const routeMatch: any = useRouteMatch("/page/productos/:id");
   const id = routeMatch?.params?.id;
@@ -19,8 +24,15 @@ const ProductEdit: React.FC = () => {
 
   useEffect(() => {
       search();
+      loadCategorias();
+  
   }
   , [history.location.pathname]);
+
+  const loadCategorias = async () => {
+    let result =await searchCategory();
+    setCategorias(result);
+  }
 
   
 
@@ -40,7 +52,7 @@ const ProductEdit: React.FC = () => {
   const save = async() => {
 
     
-    
+    console.log(producto)
     await saveProduct(producto);
     history.push('/page/productos');
 
@@ -98,6 +110,20 @@ const ProductEdit: React.FC = () => {
                     <IonInput onIonChange={e =>  producto.stock_pro = Number(e.detail.value)}  
                     value={producto.stock_pro}></IonInput>
                 </IonItem>
+
+                <IonItem>
+                  <IonLabel position="stacked">Categoría</IonLabel>
+                  <IonSelect
+                    value={producto.category?.nom_cat}
+                    onIonChange={(e) => (producto.id_pro = e.detail.value)}
+                  >
+                    {categorias.map((categoria:Category) => (
+                      <IonSelectOption key={categoria.id_cat} value={categoria.id_cat}>
+                        {categoria.nom_cat}
+                      </IonSelectOption>
+                    ))}
+                  </IonSelect>
+                </IonItem>
                 
 
                 <IonItem>
@@ -105,6 +131,20 @@ const ProductEdit: React.FC = () => {
                     <IonInput onIonChange={e =>  producto.cod_bar_pro = String(e.detail.value)}  
                     value={producto.cod_bar_pro}></IonInput>
                 </IonItem>
+
+                <IonItem>
+                    <IonLabel position='stacked'>Estado</IonLabel>
+                    <IonSelect
+                      value={producto.est_reg_pro} onIonChange={(e) => (producto.est_reg_pro = e.detail.value!)}>
+                        
+                      {estadoOptions.map((option, index) => (
+                        <IonSelectOption key={index} value={option}>
+                          {option}
+                        </IonSelectOption>
+                      ))}
+                    </IonSelect>
+                </IonItem>
+
 
                 
             </IonList> 
