@@ -12,7 +12,7 @@ import Category from '../Categorias/Category';
 const ProductEdit: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [producto, setProducto] = useState<Product>({}); 
+  const [producto, setProducto] = useState<Product>({ category: {} as Category}); 
   const [categorias, setCategorias] = useState<Category[]>([]);
   const history = useHistory();
   const [estadoOptions, setEstadoOptions] = useState<string[]>(['A', 'I']);
@@ -114,8 +114,20 @@ const ProductEdit: React.FC = () => {
                 <IonItem>
                   <IonLabel position="stacked">Categoría</IonLabel>
                   <IonSelect
-                    value={producto.category?.nom_cat}
-                    onIonChange={(e) => (producto.id_pro = e.detail.value)}
+                    value={producto.category?.id_cat}
+                    onIonChange={(e) => {
+                      const selectedCategoryId = e.detail.value;
+                      const selectedCategory = categorias.find((categoria) => categoria.id_cat === selectedCategoryId);
+        
+                      setProducto({
+                        ...producto,
+                        category: selectedCategory || {
+                          id_cat: selectedCategoryId,
+                          nom_cat: '',
+                          est_reg_cat: '',
+                        },
+                      });
+                    }}
                   >
                     {categorias.map((categoria:Category) => (
                       <IonSelectOption key={categoria.id_cat} value={categoria.id_cat}>

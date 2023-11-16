@@ -62,7 +62,7 @@ const editCategory = (id:string) =>{
           </IonToolbar>
         </IonHeader>
         <IonCard>
-          <IonTitle>Gestion de Productos</IonTitle>
+          <IonTitle>Gestion de Categorias</IonTitle>
 
           <IonItem>
             <IonButton onClick={addCategory} color="primary" fill="solid" slot="end" size="default">
@@ -74,7 +74,7 @@ const editCategory = (id:string) =>{
               <IonRow>
                 <IonCol>Id</IonCol>
                 <IonCol>Nombre</IonCol>
-                
+                <IonCol>Acciones</IonCol>
               </IonRow>
 
 
