@@ -1,0 +1,16 @@
+.table ion-row{
+    padding: 10px 5px;
+    font-size: 16px;
+  }
+  .table ion-row:nth-child(even){
+    background: #efefef;
+  
+  }
+  .table ion-row:nth-child(odd){
+    background: #fff;
+  }
+  
+  .table ion-row:first-child{
+    font-weight: bold;
+    text-transform: uppercase;
+  }

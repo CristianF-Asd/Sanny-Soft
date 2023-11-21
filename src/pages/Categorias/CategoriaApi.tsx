@@ -23,9 +23,6 @@ export async function removeCategory(id: string){
             "Content-Type": 'application/json'
         }
     })
-
-
-
 }
 
 export async function searchCategoryById(id: string){
@@ -48,10 +45,4 @@ export async function saveCategory(category:Category){
             "Content-Type": 'application/json'
         }
     })
-
-
-  
-
-
-
 }

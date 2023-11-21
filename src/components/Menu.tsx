@@ -35,14 +35,14 @@ const appPages: AppPage[] = [
     mdIcon: paperPlaneSharp
   },
   {
-    title: 'Favorites',
-    url: '/page/Favorites',
+    title: 'Mesa',
+    url: '/page/mesa',
     iosIcon: heartOutline,
     mdIcon: heartSharp
   },
   {
-    title: 'Archived',
-    url: '/page/Archived',
+    title: 'Rol Usuario',
+    url: '/page/rol-usuario',
     iosIcon: archiveOutline,
     mdIcon: archiveSharp
   },
@@ -69,8 +69,8 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>SannySofr</IonListHeader>
+          <IonNote>cfloresco@unsa.edu.pe</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

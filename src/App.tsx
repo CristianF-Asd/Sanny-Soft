@@ -27,6 +27,10 @@ import Productolist from './pages/Productos/Productolist';
 import ProductEdit from './pages/Productos/ProductEdit';
 import Categorialist from './pages/Categorias/Categorialist';
 import CategoriaEdit from './pages/Categorias/CategoriaEdit';
+import Mesalist from './pages/Mesas/Mesalist';
+import MesaEdit from './pages/Mesas/MesaEdit';
+import RolUsuariolist from './pages/RolUsuario/RolUsuariolist';
+import RolUsuarioEdit from './pages/RolUsuario/RolUsuarioEdit';
 
 setupIonicReact();
 
@@ -56,6 +60,15 @@ const App: React.FC = () => {
               <Categorialist />
             </Route>
 
+            <Route path="/page/mesa" exact={true}>  
+              <Mesalist />
+            </Route>
+
+            <Route path="/page/rol-usuario" exact={true}>  
+              <RolUsuariolist />
+            </Route>
+
+
             
 
             <Route path="/page/productos/:id" exact={true}>  
@@ -64,6 +77,14 @@ const App: React.FC = () => {
 
             <Route path="/page/categorias/:id" exact={true}>  
               <CategoriaEdit />
+            </Route>
+
+            <Route path="/page/mesa/:id" exact={true}>  
+              <MesaEdit />
+            </Route>
+
+            <Route path="/page/rol-usuario/:id" exact={true}>  
+              <RolUsuarioEdit />
             </Route>
 
           
