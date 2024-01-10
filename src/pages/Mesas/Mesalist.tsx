@@ -79,7 +79,7 @@ return (
 
               {mesa.map((mesa:Mesa) =>
 
-                <IonRow>
+                <IonRow key={mesa.id_me}>
                   <IonCol >{mesa.id_me}</IonCol>
                   <IonCol>{mesa.num_me}</IonCol>
                   <IonCol>{mesa.est_me}</IonCol>

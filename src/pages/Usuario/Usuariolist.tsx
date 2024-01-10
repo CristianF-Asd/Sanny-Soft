@@ -80,7 +80,7 @@ const editUsuario = (id:string) =>{
 
               {usuario.map((usuario:Usuario) =>
 
-                <IonRow>
+                <IonRow key={usuario.id_usu}>
                   <IonCol >{usuario.id_usu}</IonCol>
                   <IonCol>{usuario.nom_usu}</IonCol>
                   <IonCol>

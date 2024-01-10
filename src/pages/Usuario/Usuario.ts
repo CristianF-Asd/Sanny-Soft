@@ -9,6 +9,6 @@ export default interface Usuario{
     dni_usu?: string;
     ema_usu?: string;
     contr_usu?: string;
-    rolusuario?: RolUsuario;
+    rolUser?: RolUsuario;
     est_reg_usu?: string;
 }

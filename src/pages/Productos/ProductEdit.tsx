@@ -118,7 +118,7 @@ const ProductEdit: React.FC = () => {
                     onIonChange={(e) => {
                       const selectedCategoryId = e.detail.value;
                       const selectedCategory = categorias.find((categoria) => categoria.id_cat === selectedCategoryId);
-        
+                 
                       setProducto({
                         ...producto,
                         category: selectedCategory || {

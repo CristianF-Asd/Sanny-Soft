@@ -80,7 +80,7 @@ const editRolUsuario = (id:string) =>{
 
               {rolusuario.map((rolusuario:RolUsuario) =>
 
-                <IonRow>
+                <IonRow key={rolusuario.id_rol}>
                   <IonCol >{rolusuario.id_rol}</IonCol>
                   <IonCol>{rolusuario.des_rol}</IonCol>
                   <IonCol>

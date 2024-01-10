@@ -12,7 +12,7 @@ import RolUsuario from '../RolUsuario/RolUsuario';
 const UsuarioEdit: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [usuario, setUsuario] = useState<Usuario>({ rolusuario: {} as RolUsuario}); 
+  const [usuario, setUsuario] = useState<Usuario>({ rolUser: {} as RolUsuario}); 
   const [rolusuario, setRolusuario] = useState<RolUsuario[]>([]);
   const history = useHistory();
   const [estadoOptions, setEstadoOptions] = useState<string[]>(['A', 'I']);
@@ -24,12 +24,12 @@ const UsuarioEdit: React.FC = () => {
 
   useEffect(() => {
       search();
-      loadUsuario();
+      loadRolUsuario();
   
   }
   , [history.location.pathname]);
 
-  const loadUsuario = async () => {
+  const loadRolUsuario = async () => {
     let result =await searchRolUsuario();
     setRolusuario(result);
   }
@@ -125,24 +125,24 @@ const UsuarioEdit: React.FC = () => {
 
                 <IonItem>
                   <IonLabel position="stacked">Rol de Usuario</IonLabel>
-                  <IonSelect
-                    value={usuario.rolusuario?.id_rol}
+                  <IonSelect 
+                    value={usuario.rolUser?.id_rol}
+                    
                     onIonChange={(e) => {
-                      const selectedRolUsuarioId = e.detail.value;
-                      const selectedRolUsuario = rolusuario.find((rolusuario) => rolusuario.id_rol === selectedRolUsuarioId);
+                      const selectedRolUsuarioId = e.detail.value;                 
+                      const selectedRolUsuario = rolusuario.find((rolUser) => rolUser.id_rol === selectedRolUsuarioId);
                       
         
                       setUsuario({
                         ...usuario,
-                        rolusuario: selectedRolUsuario || {
+                        rolUser: selectedRolUsuario || {
                           id_rol: selectedRolUsuarioId,
                           des_rol: '',
-                          est_reg_rol: '',
-                          
-
+                          est_reg_rol: ''
                         },
                         
                       });
+                      console.log(usuario)
                     }}
                   >
                     {rolusuario.map((rolusuario:RolUsuario) => (

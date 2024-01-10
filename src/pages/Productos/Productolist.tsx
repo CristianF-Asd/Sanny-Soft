@@ -83,7 +83,7 @@ const editProduct = (id:string) =>{
 
               {productos.map((producto:Product) =>
 
-                <IonRow>
+                <IonRow key={producto.id_pro}>
                   <IonCol >{producto.id_pro}</IonCol>
                   <IonCol>{producto.nom_pro}</IonCol>
                   <IonCol>{producto.prec_pro}</IonCol>

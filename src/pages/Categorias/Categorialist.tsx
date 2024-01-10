@@ -80,7 +80,7 @@ const editCategory = (id:string) =>{
 
               {categorias.map((categoria:Category) =>
 
-                <IonRow>
+                <IonRow key={categoria.id_cat}>
                   <IonCol >{categoria.id_cat}</IonCol>
                   <IonCol>{categoria.nom_cat}</IonCol>
                   
