@@ -31,6 +31,8 @@ import Mesalist from './pages/Mesas/Mesalist';
 import MesaEdit from './pages/Mesas/MesaEdit';
 import RolUsuariolist from './pages/RolUsuario/RolUsuariolist';
 import RolUsuarioEdit from './pages/RolUsuario/RolUsuarioEdit';
+import Usuariolist from './pages/Usuario/Usuariolist';
+import UsuarioEdit from './pages/Usuario/UsuarioEdit';
 
 setupIonicReact();
 
@@ -68,6 +70,10 @@ const App: React.FC = () => {
               <RolUsuariolist />
             </Route>
 
+            <Route path="/page/usuario" exact={true}>  
+              <Usuariolist />
+            </Route>
+
 
             
 
@@ -85,6 +91,10 @@ const App: React.FC = () => {
 
             <Route path="/page/rol-usuario/:id" exact={true}>  
               <RolUsuarioEdit />
+            </Route>
+
+            <Route path="/page/usuario/:id" exact={true}>  
+              <UsuarioEdit />
             </Route>
 
           

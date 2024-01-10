@@ -6,7 +6,7 @@ export default interface Product{
     nom_pro?: string;
     des_pro?: string; 
     prec_pro?: number;
-    category?: Category
+    category?: Category;
     est_reg_pro?: number;
     stock_pro?: number;
     cod_bar_pro?: string;

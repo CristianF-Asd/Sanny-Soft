@@ -41,6 +41,12 @@ const appPages: AppPage[] = [
     mdIcon: heartSharp
   },
   {
+    title: 'Usuario',
+    url: '/page/usuario',
+    iosIcon: heartOutline,
+    mdIcon: heartSharp
+  },
+  {
     title: 'Rol Usuario',
     url: '/page/rol-usuario',
     iosIcon: archiveOutline,

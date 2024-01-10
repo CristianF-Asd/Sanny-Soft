@@ -130,6 +130,7 @@ const UsuarioEdit: React.FC = () => {
                     onIonChange={(e) => {
                       const selectedRolUsuarioId = e.detail.value;
                       const selectedRolUsuario = rolusuario.find((rolusuario) => rolusuario.id_rol === selectedRolUsuarioId);
+                      
         
                       setUsuario({
                         ...usuario,
@@ -137,7 +138,10 @@ const UsuarioEdit: React.FC = () => {
                           id_rol: selectedRolUsuarioId,
                           des_rol: '',
                           est_reg_rol: '',
+                          
+
                         },
+                        
                       });
                     }}
                   >
